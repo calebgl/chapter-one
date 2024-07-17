@@ -1,13 +1,20 @@
 import Knex from 'knex';
+import {
+	POSTGRES_DATABASE,
+	POSTGRES_HOST,
+	POSTGRES_PORT,
+	POSTGRES_USER,
+	POSTGRES_PASSWORD
+} from '$env/static/private';
 
 export const db = Knex({
 	client: 'pg',
 	connection: {
-		host: import.meta.env.POSTGRES_HOST,
-		port: import.meta.env.POSTGRES_PORT,
-		user: import.meta.env.POSTGRES_USER,
-		password: import.meta.env.POSTGRES_PASSWORD,
-		database: import.meta.env.POSTGRES_DATABASE,
+		host: POSTGRES_HOST,
+		port: Number(POSTGRES_PORT),
+		user: POSTGRES_USER,
+		password: POSTGRES_PASSWORD,
+		database: POSTGRES_DATABASE,
 		ssl: false
 	},
 	pool: {
