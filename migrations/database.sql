@@ -5,14 +5,13 @@ DECLARE
 	book3 uuid := gen_random_uuid();
 BEGIN
 
-	drop table if exists books;
+	drop table if exists books cascade;
 	create table books (
 		id uuid primary key,
 		title character varying not null,
 		description text,
 		img character varying ,
 		author character varying not null,
-		rating real,
 		price numeric(5,2) not null,
 		language character varying not null,
 		publisher character varying not null,
@@ -24,23 +23,34 @@ BEGIN
 
 	insert into books values
 	(book1, 'The Way of Kings', null, null, 'Brandon Sanderson',
-		null, 9.99, 'english', 'Tor Books', 1280, '2011-05-24', now(), now()),
+		9.99, 'english', 'Tor Books', 1280, '2011-05-24', now(), now()),
 	(book2, 'Words of Radiance', null, null, 'Brandon Sanderson',
-		null, 7.99, 'english', 'Tor Books', 1088, '2014-03-04', now(), now()),
+		7.99, 'english', 'Tor Books', 1088, '2014-03-04', now(), now()),
 	(book3, 'Oathbringer', null, null, 'Brandon Sanderson',
-		null, 8.99, 'english', 'Tor Books', 1248, '2017-11-24', now(), now());
+		8.99, 'english', 'Tor Books', 1248, '2017-11-24', now(), now());
 
-	drop table if exists comments;
-	create table comments(
+	drop table if exists reviews;
+	create table reviews(
 		id uuid primary key,
 		username character varying not null,
 		comment text not null,
+		rating numeric(2, 1) not null,
 		book_id uuid not null references books(id) on delete cascade,
 		created_at timestamp not null,
 		updated_at timestamp not null
 	);
 
-	insert into comments values
-	(gen_random_uuid(), 'calebgl', 'hello world!', book1, now(), now());
+	insert into reviews values
+	(gen_random_uuid(), 'calebgl', 'hello world!', 4.8, book1, now(), now());
+
+	drop table if exists review_summaries;
+	create table review_summaries (
+		book_id uuid primary key references books(id) on delete cascade,
+		review_count bigint not null,
+		average_rating numeric(2,1) not null
+	);
+
+	insert into review_summaries values
+	(book1, 1, 4.8);
 END;
 $$;

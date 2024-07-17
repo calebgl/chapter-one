@@ -26,14 +26,18 @@
 	{#await data.comments}
 		Loading comments...
 	{:then comments}
-		total comments: {comments[0]?.total}
-		{#each comments as comment}
-			<div class="comment">
-				<p class="comment__username">{comment.username}</p>
-				<hr />
-				<p class="comment__text">{comment.comment}</p>
-			</div>
-		{/each}
+		{#if comments[0]}
+			total comments: {comments[0]?.total}
+			{#each comments as comment}
+				<div class="comment">
+					<p class="comment__username">{comment.username}</p>
+					<hr />
+					<p class="comment__text">{comment.comment}</p>
+				</div>
+			{/each}
+		{:else}
+			there are no comments
+		{/if}
 	{/await}
 </section>
 
