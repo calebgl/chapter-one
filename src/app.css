@@ -392,16 +392,23 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 @layer base {
 	:root {
-		--lightness: 97.18%;
-		--chroma: 5.31;
-		--hue: 60.82;
-		--clr-primary: var(--lightness) var(--chroma) var(--hue);
+		--clr-primary-300: lch(98.44% 1.66 56.65);
+		--clr-primary-600: lch(95.44% 1.66 73.65);
+		--clr-primary-900: lch(90.44% 1.66 73.65);
+		--clr-yellow-600: lch(61.7% 71.2 59.5);
+
+		--fs-200: 0.725rem;
+		--fs-300: 0.875rem;
+		--fs-400: 1rem;
+		--fs-500: 1.25rem;
+		--fs-600: 1.5rem;
+		--fs-700: 2rem;
+
+		--ts-300: 300ms;
 	}
 
 	body {
 		min-height: 100svh;
-		display: grid;
-		place-content: center;
-		background-color: lch(var(--clr-primary));
+		background-color: var(--clr-primary-300);
 	}
 }
