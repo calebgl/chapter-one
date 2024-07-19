@@ -54,20 +54,40 @@ export async function seed(knex) {
 	]);
 
 	await knex('reviews').del();
-	await knex('reviews').insert({
-		id: v4(),
-		username: 'admin',
-		comment: 'Great book!',
-		rating: 5,
-		book_id: bookId,
-		created_at: new Date(),
-		updated_at: new Date()
-	});
+	await knex('reviews').insert([
+		{
+			id: v4(),
+			username: 'admin',
+			comment: 'Great book!',
+			rating: 5,
+			book_id: bookId,
+			created_at: new Date(),
+			updated_at: new Date()
+		},
+		{
+			id: v4(),
+			username: 'admin',
+			comment: 'I would buy it again!',
+			rating: 4.9,
+			book_id: bookId,
+			created_at: new Date(),
+			updated_at: new Date()
+		},
+		{
+			id: v4(),
+			username: 'admin',
+			comment: 'My collection keeps growings!',
+			rating: 4.8,
+			book_id: bookId,
+			created_at: new Date(),
+			updated_at: new Date()
+		}
+	]);
 
 	await knex('review_summaries').del();
 	await knex('review_summaries').insert({
 		book_id: bookId,
-		review_count: 1,
-		average_rating: 5
+		review_count: 3,
+		average_rating: 4.9
 	});
 }

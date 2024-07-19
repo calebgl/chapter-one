@@ -19,7 +19,8 @@ export async function load({ params }) {
 		error(404, 'book not found');
 	}
 
-	const comments = db
+	/** @type {Promise<any[]>} */
+	const reviews = db
 		.table('reviews')
 		.select(db.raw('*, count(*) over() as total'))
 		.where('book_id', params.id)
@@ -28,7 +29,7 @@ export async function load({ params }) {
 
 	return {
 		book,
-		comments
+		reviews
 	};
 }
 

@@ -404,6 +404,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 		--fs-600: 1.5rem;
 		--fs-700: 2rem;
 
+		--fw-400: 400;
+		--fw-700: 700;
+
 		--ts-300: 300ms;
 	}
 

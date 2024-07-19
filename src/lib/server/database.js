@@ -1,4 +1,4 @@
-import Knex from 'knex';
+import knex from 'knex';
 import {
 	POSTGRES_DATABASE,
 	POSTGRES_HOST,
@@ -7,7 +7,7 @@ import {
 	POSTGRES_PASSWORD
 } from '$env/static/private';
 
-export const db = Knex({
+export const db = knex({
 	client: 'pg',
 	connection: {
 		host: POSTGRES_HOST,

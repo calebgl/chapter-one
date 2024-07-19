@@ -59,7 +59,8 @@
 			</div>
 
 			{#if tab === 0}
-				<p>{data.book.description}</p>
+				Desc
+				<!-- <p>{data.book.description}</p> -->
 			{:else}
 				<table class="details">
 					<tbody>
@@ -93,8 +94,8 @@
 		</div>
 	</section>
 
-	<section class="reviews">
-		<h2>Reviews</h2>
+	<section class="reviews-section">
+		<h2 class="reviews-section__title">Reviews</h2>
 		<!-- <form class="form" method="post" use:enhance> -->
 		<!-- 	<label for="username">username</label> -->
 		<!-- 	<input type="text" name="username" required /> -->
@@ -108,24 +109,40 @@
 		<!-- 	<button type="submit">comment</button> -->
 		<!-- </form> -->
 		<!---->
-		<!-- <section> -->
-		<!-- 	{#await data.comments} -->
-		<!-- 		Loading comments... -->
-		<!-- 	{:then comments} -->
-		<!-- 		{#if comments[0]} -->
-		<!-- 			total comments: {comments[0].total} -->
-		<!-- 			{#each comments as comment} -->
-		<!-- 				<div class="comment"> -->
-		<!-- 					<p class="comment__username">{comment.username}</p> -->
-		<!-- 					<hr /> -->
-		<!-- 					<p class="comment__text">{comment.comment}</p> -->
-		<!-- 				</div> -->
-		<!-- 			{/each} -->
-		<!-- 		{:else} -->
-		<!-- 			there are no comments -->
-		<!-- 		{/if} -->
-		<!-- 	{/await} -->
-		<!-- </section> -->
+
+		<!-- TODO: add skeleton loader -->
+		{#await data.reviews}
+			Loading reviews...
+		{:then reviews}
+			{#if data.book.review_count}
+				<p>Total reviews: {data.book.review_count}</p>
+				<div class="reviews">
+					{#each reviews as review}
+						<div class="review">
+							<header class="review__header">
+								<div class="review__avatar">{review.username[0].toUpperCase()}</div>
+								<div class="review__profile">
+									<p class="review__username">{review.username}</p>
+									<div class="review__rating-wrapper">
+										<p class="review__rating">{review.rating}</p>
+										<Star />
+									</div>
+								</div>
+								<p class="review__date">
+									{DateTime.fromJSDate(review.created_at).toFormat('LLL dd, yyyy')}
+								</p>
+							</header>
+							<div class="review__body">
+								<p class="review__comment">{review.comment}</p>
+							</div>
+						</div>
+						<hr />
+					{/each}
+				</div>
+			{:else}
+				There are no comments
+			{/if}
+		{/await}
 	</section>
 </div>
 
@@ -171,7 +188,7 @@
 
 	.book__title {
 		font-size: var(--fs-600);
-		font-weight: bold;
+		font-weight: var(--fw-700);
 	}
 
 	.book__author {
@@ -251,6 +268,66 @@
 		background-color: var(--clr-primary-600);
 	}
 
+	.reviews-section {
+		margin-top: 1.5rem;
+	}
+
+	.reviews-section__title {
+		font-size: var(--fs-500);
+		font-weight: var(--fw-700);
+	}
+
+	.reviews {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.review {
+		display: grid;
+		gap: 0.5rem;
+	}
+
+	.review__header {
+		display: flex;
+		gap: 0.5rem;
+		justify-content: space-between;
+		align-items: start;
+		flex-wrap: wrap;
+	}
+
+	.review__profile {
+		flex-grow: 1;
+	}
+	.review__date {
+		grid-row-start: 1;
+		grid-column-start: 2;
+		justify-self: end;
+	}
+	.review__rating {
+		grid-area: rating;
+	}
+
+	.review__avatar {
+		aspect-ratio: 1/1;
+		width: 2.75rem;
+		border-radius: 50%;
+		background-color: var(--clr-primary-900);
+		display: grid;
+		place-content: center;
+		font-size: var(--fs-500);
+	}
+
+	.review__rating-wrapper {
+		display: flex;
+		gap: 0.25rem;
+	}
+
+	.review__date,
+	.review__rating,
+	.review__comment {
+		font-size: var(--fs-300);
+	}
+
 	th,
 	td {
 		font-weight: normal;
@@ -266,5 +343,9 @@
 
 	td {
 		background-color: lch(98.44% 0.66 56.65);
+	}
+
+	hr:last-of-type {
+		display: none;
 	}
 </style>
