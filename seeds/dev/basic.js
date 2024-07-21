@@ -187,13 +187,13 @@ Skyward
 
 			let summary = acc[cur.book_id];
 
-			if (cur.rating <= 10) {
+			if (cur.rating < 20) {
 				summary.one_star_count += 1;
-			} else if (cur.rating <= 20) {
+			} else if (cur.rating < 30) {
 				summary.two_star_count += 1;
-			} else if (cur.rating <= 30) {
+			} else if (cur.rating < 40) {
 				summary.three_star_count += 1;
-			} else if (cur.rating <= 40) {
+			} else if (cur.rating < 50) {
 				summary.four_star_count += 1;
 			} else {
 				summary.five_star_count += 1;
