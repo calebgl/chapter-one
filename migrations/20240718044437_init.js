@@ -22,7 +22,7 @@ export function up(knex) {
 			table.uuid('id').primary();
 			table.string('username').notNullable();
 			table.string('comment').notNullable();
-			table.decimal('rating', 2, 1).notNullable();
+			table.integer('rating').notNullable();
 			table.uuid('book_id').notNullable().references('id').inTable('books').onDelete('cascade');
 			table.timestamp('created_at').notNullable();
 			table.timestamp('updated_at').notNullable();
@@ -39,5 +39,9 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-	return knex.schema.dropTable('books').dropTable('reviews').dropTable('review_summaries');
+	return knex.raw(`
+DROP TABLE books CASCADE;
+DROP TABLE reviews;
+DROP TABLE review_summaries;
+`);
 }

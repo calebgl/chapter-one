@@ -12,7 +12,8 @@
 		"format": "prettier --write .",
 		"migrate:up": "knex migrate:up",
 		"migrate:down": "knex migrate:down",
-		"migrate:status": "knex migrate:status"
+		"migrate:status": "knex migrate:status",
+		"seed": "knex seed:run"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
