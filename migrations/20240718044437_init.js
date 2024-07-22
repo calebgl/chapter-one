@@ -8,7 +8,7 @@ export function up(knex) {
 			table.uuid('id').primary();
 			table.string('title').notNullable();
 			table.text('description');
-			table.text('img');
+			table.binary('img');
 			table.string('author').notNullable();
 			table.decimal('price', 6, 2).notNullable();
 			table.enu('language', ['english', 'spanish']).notNullable();

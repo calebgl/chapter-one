@@ -1,10 +1,20 @@
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { v4 } from 'uuid';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 export async function seed(knex) {
+	const wayofkings = readFileSync(resolve(__dirname, '../../static/wayofkings.jpg'));
+	const wordsofradiance = readFileSync(resolve(__dirname, '../../static/wordsofradiance.jpg'));
+	const oathbringer = readFileSync(resolve(__dirname, '../../static/oathbringer.jpg'));
+
 	const books = [
 		{
 			id: v4(),
@@ -92,7 +102,7 @@ Skyward
 ● Cytonic
 ● Skyward Flight (with Janci Patterson)
 ● Defiant`,
-			img: null,
+			img: wayofkings,
 			author: 'Brandon Sanderson',
 			price: 9.99,
 			language: 'english',
@@ -106,7 +116,7 @@ Skyward
 			id: v4(),
 			title: 'Words of Radiance',
 			description: null,
-			img: null,
+			img: wordsofradiance,
 			author: 'Brandon Sanderson',
 			price: 7.99,
 			language: 'english',
@@ -120,7 +130,7 @@ Skyward
 			id: v4(),
 			title: 'Oathbringer',
 			description: null,
-			img: null,
+			img: oathbringer,
 			author: 'Brandon Sanderson',
 			price: 8.99,
 			language: 'english',
