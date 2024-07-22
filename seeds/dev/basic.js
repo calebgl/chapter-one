@@ -208,10 +208,27 @@ Skyward
 		}, {})
 	);
 
+	const reviewSummariesEmpty = books.map((book) => ({
+		book_id: book.id,
+		total_review_count: 0,
+		one_star_count: 0,
+		two_star_count: 0,
+		three_star_count: 0,
+		four_star_count: 0,
+		five_star_count: 0,
+		average_rating: 0,
+		created_at: new Date(),
+		updated_at: new Date()
+	}));
+
+	await knex('review_summaries');
+	await knex('review_summaries').insert(reviewSummariesEmpty);
+
 	for (let i = 0; i < reviewSummaries.length; i++) {
 		reviewSummaries[i].average_rating /= reviewSummaries[i].total_review_count * 10;
 	}
 
-	await knex('review_summaries').del();
-	await knex('review_summaries').insert(reviewSummaries);
+	for (const summary of reviewSummaries) {
+		await knex('review_summaries').update(summary).where('book_id', summary.book_id);
+	}
 }

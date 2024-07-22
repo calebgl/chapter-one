@@ -28,9 +28,8 @@ export async function load({ params }) {
 		error(404, 'book not found');
 	}
 
-	// /** @type {Promise<any[]>} */
-	const reviews = await db
-		// .select(db.raw('reviews.*, count(*) over() as total'))
+	/** @type {Promise<any[]>} */
+	const reviews = db
 		.select(
 			'reviews.*',
 			db.raw("to_char(reviews.rating::decimal / 10, '9.9') as rating"),
@@ -79,8 +78,7 @@ export const actions = {
 			}
 
 			const starsColumn = `${stars}_star_count`;
-			const updatedCount = await tx
-				.table('review_summaries')
+			await tx('review_summaries')
 				.update({
 					[starsColumn]: tx.raw('?? + 1', [starsColumn]),
 					total_review_count: tx.raw('total_review_count + 1'),
@@ -90,20 +88,6 @@ export const actions = {
 					)
 				})
 				.where({ book_id: params.id });
-
-			if (updatedCount === 0) {
-				await tx('review_summaries').insert({
-					book_id: params.id,
-					one_star_count: 0,
-					two_star_count: 0,
-					three_star_count: 0,
-					four_star_count: 0,
-					five_star_count: 0,
-					[starsColumn]: 1,
-					total_review_count: 1,
-					average_rating: rating / 10
-				});
-			}
 		});
 
 		return;
