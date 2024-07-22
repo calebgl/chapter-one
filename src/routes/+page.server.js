@@ -16,8 +16,8 @@ export async function load({ url }) {
 
 	return {
 		books: await db
-			.table('books')
-			.select()
+			.select('books.id', 'books.title', 'books.description', 'books.author', 'books.price')
+			.from('books')
 			.offset((page - 1) * limit)
 			.limit(limit)
 	};

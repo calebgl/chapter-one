@@ -24,7 +24,9 @@
 		</div>
 	</header>
 
-	<div class="book__cover"></div>
+	<div class="book__cover">
+		<img src={`/api/books/${data.book.id}/images`} alt="cover" />
+	</div>
 </section>
 
 <section class="book-info">
@@ -69,7 +71,7 @@
 
 <style>
 	.book {
-		margin-bottom: 2rem;
+		margin-top: 1rem;
 	}
 
 	.book__header {
@@ -78,10 +80,8 @@
 
 	.book__cover {
 		aspect-ratio: 3/4;
-		width: clamp(100px, 60%, 300px);
-		background-color: lime;
-		margin-left: auto;
-		margin-right: auto;
+		width: clamp(200px, 60%, 400px);
+		margin-inline: auto;
 	}
 
 	.book__title {

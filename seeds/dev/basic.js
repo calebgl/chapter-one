@@ -102,7 +102,6 @@ Skyward
 ● Cytonic
 ● Skyward Flight (with Janci Patterson)
 ● Defiant`,
-			img: wayofkings,
 			author: 'Brandon Sanderson',
 			price: 9.99,
 			language: 'english',
@@ -116,7 +115,6 @@ Skyward
 			id: v4(),
 			title: 'Words of Radiance',
 			description: null,
-			img: wordsofradiance,
 			author: 'Brandon Sanderson',
 			price: 7.99,
 			language: 'english',
@@ -130,7 +128,6 @@ Skyward
 			id: v4(),
 			title: 'Oathbringer',
 			description: null,
-			img: oathbringer,
 			author: 'Brandon Sanderson',
 			price: 8.99,
 			language: 'english',
@@ -144,6 +141,42 @@ Skyward
 
 	await knex('books').del();
 	await knex('books').insert(books);
+
+	const bookImages = [
+		{
+			book_id: books[0].id,
+			image_number: 1,
+			image_data: wayofkings,
+			file_size: wayofkings.length,
+			filename: 'wayofkings',
+			mime_type: 'image/jpeg',
+			created_at: new Date(),
+			updated_at: new Date()
+		},
+		{
+			book_id: books[1].id,
+			image_number: 1,
+			image_data: wordsofradiance,
+			file_size: wordsofradiance.length,
+			filename: 'wordsofradiance',
+			mime_type: 'image/jpeg',
+			created_at: new Date(),
+			updated_at: new Date()
+		},
+		{
+			book_id: books[2].id,
+			image_number: 1,
+			image_data: oathbringer,
+			file_size: oathbringer.length,
+			filename: 'oathbringer',
+			mime_type: 'image/jpeg',
+			created_at: new Date(),
+			updated_at: new Date()
+		}
+	];
+
+	await knex('book_images').del();
+	await knex('book_images').insert(bookImages);
 
 	const reviews = [
 		{

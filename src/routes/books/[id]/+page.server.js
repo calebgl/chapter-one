@@ -13,7 +13,15 @@ export async function load({ params }) {
 		.table('books')
 		.leftJoin('review_summaries', 'books.id', '=', 'review_summaries.book_id')
 		.first(
-			'books.*',
+			'books.id',
+			'books.title',
+			'books.description',
+			'books.author',
+			'books.price',
+			'books.language',
+			'books.publisher',
+			'books.pages',
+			'books.publication_date',
 			'review_summaries.total_review_count',
 			'review_summaries.average_rating',
 			'review_summaries.one_star_count',
