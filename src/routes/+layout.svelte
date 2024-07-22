@@ -2,4 +2,16 @@
 	import '../app.css';
 </script>
 
-<slot />
+<div class="page-wrapper">
+	<slot />
+</div>
+
+<style>
+	.page-wrapper {
+		padding: 1rem;
+	}
+
+	.page-wrapper :global(> * + *) {
+		margin-top: 2rem;
+	}
+</style>

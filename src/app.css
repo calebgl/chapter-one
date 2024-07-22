@@ -392,10 +392,19 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 @layer base {
 	:root {
-		--clr-primary-300: lch(98.44% 1.66 56.65);
-		--clr-primary-600: lch(95.44% 1.66 73.65);
-		--clr-primary-900: lch(90.44% 1.66 73.65);
+		--clr-primary-400: lch(79.4% 26.68 160.6);
+		--clr-primary-500: lch(76.4% 26.68 160.6);
+
+		--clr-secondary-400: lch(92.18% 15.94 136.8);
+		--clr-secondary-500: lch(89.18% 15.94 136.8);
+
+		--clr-bg-400: lch(98.44% 1.66 56.65);
+		--clr-bg-500: lch(95.44% 1.66 73.65);
+		--clr-bg-600: lch(90.44% 1.66 73.65);
+
+		--clr-yellow-400: lch(67.7% 71.2 59.5);
 		--clr-yellow-600: lch(61.7% 71.2 59.5);
+		--clr-gray-400: lch(77.02% 1.53 199.58);
 
 		--fs-200: 0.725rem;
 		--fs-300: 0.875rem;
@@ -412,6 +421,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 	body {
 		min-height: 100svh;
-		background-color: var(--clr-primary-300);
+		background-color: var(--clr-bg-400);
 	}
 }
