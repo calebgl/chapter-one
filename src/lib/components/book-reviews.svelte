@@ -3,7 +3,6 @@
 	import { formatDate } from '$lib/intl';
 	import Star from './icons/star.svelte';
 	import Button from './button.svelte';
-	import { onMount } from 'svelte';
 
 	export let summary;
 	export let reviews;
@@ -14,6 +13,10 @@
 	 * @returns {string}
 	 */
 	function calculateWidth(count, total) {
+		if (BigInt(total) === BigInt(0)) {
+			return '0%';
+		}
+
 		return Math.trunc((count * 100) / total) + '%';
 	}
 
